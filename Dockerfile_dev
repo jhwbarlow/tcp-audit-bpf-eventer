@@ -1,0 +1,14 @@
+FROM golang:1.17
+RUN apt-get update -yq && \
+    apt-get install -yq clang libelf-dev && \
+    apt-get clean -yq && \
+    cd /tmp && \
+    git clone https://github.com/libbpf/libbpf.git
+
+# COPY . /tmp/src
+#     cd /tmp/libbpf/src && \
+#     CFLAGS="-fPIC" BUILD_STATIC_ONLY="y" DESTDIR="/tmp/libbpf/output" make install && \
+#     cp -ra /tmp/libbpf/output/usr/include/bpf/* /tmp/src/bpf/include/bpf && \
+#     cp /tmp/libbpf/output/usr/lib64/libbpf.a /tmp/src/bpf/lib && \    
+#     cd /tmp/src && \
+#     clang -g -O2 -c -target bpf -o bpf.o bpf/bpf.c
